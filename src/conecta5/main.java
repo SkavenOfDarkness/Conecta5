@@ -22,6 +22,11 @@ public class main extends JFrame {
     public main() {
         super("Conecta 5");
         tablero = new Tablero();
+        tablero.Pon(Pieza.ROJA, 0, 0);
+        tablero.Pon(Pieza.ROJA, 0, 1);
+        tablero.Pon(Pieza.ROJA, 0, 2);
+        tablero.Pon(Pieza.AZUL, 0, 3);
+        tablero.Pon(Pieza.AZUL, 1, 0);
         this.getContentPane().add(tablero);
         this.setSize(tablero.getPreferredSize());
         this.pack();

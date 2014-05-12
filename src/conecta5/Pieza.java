@@ -6,25 +6,31 @@
 
 package conecta5;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+
 
 class Pieza {
     
-    public static Ellipse2D.Float elipse;
+    public static final String ROJA = "img/roja.png";
+    public static final String AZUL = "img/azul.png";
     
-    public Pieza() {
-        
+    private BufferedImage img;
+    
+    public Pieza(String s) {
+        try {
+            img = ImageIO.read(new File(s));
+        } catch (IOException ex) {
+            Logger.getLogger(Pieza.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    void paintComponent(Rectangle2D r) {
-        elipse.setFrame(r);
+    void paintComponent(Graphics g, float x, float y) {
+        g.drawImage(img, (int)x, (int)y, null);
     }
 }

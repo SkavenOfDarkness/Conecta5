@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class Tablero extends JPanel { 
     private static final int TAMANO = 15;
-    private static final int MAXIMO = 800;
+    private static final int MAXIMO = 810;
     private static final int LADO = MAXIMO / TAMANO;
     private Casilla t[][];
     
@@ -49,7 +49,7 @@ public class Tablero extends JPanel {
         return new Dimension(MAXIMO, MAXIMO);
     }
 
-    void Posa(String s, int i, int j) {
-        t[i][j].setPieza(new Pieza());
+    void Pon(String s, int i, int j) {
+        t[i][j].setPieza(new Pieza(s));
     }
 }

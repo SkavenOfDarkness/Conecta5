@@ -28,9 +28,8 @@ public class Casilla {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D)g;
         g2d.draw(this.cas);
-//        g2d.fill(this.cas);
         if(this.ocupada) {
-            this.pieza.paintComponent(cas);
+            this.pieza.paintComponent(g, this.cas.x, this.cas.y);
         }
     }
     
