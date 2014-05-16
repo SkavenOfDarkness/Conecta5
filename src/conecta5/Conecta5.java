@@ -17,10 +17,9 @@ import javax.swing.JFrame;
  */
 public class Conecta5 extends JFrame implements MouseListener {
 
-    /**
-     * @param args the command line arguments
-     */
     Tablero tablero;
+    //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
+    boolean jugador = true;
     
     //Programa principal, llama al constructor del juego y hace visible la ventana
     public static void main(String[] args) {
@@ -63,8 +62,16 @@ public class Conecta5 extends JFrame implements MouseListener {
             comp = e.getComponent();
         }
 //        System.out.println("X: " + x + " | Y: " + y + "         " + comp);
-        tablero.Pon(Pieza.ROJA, y, x);
-        repaint();
+        if(jugador) {
+            tablero.Pon(Pieza.ROJA, y, x);
+            repaint();
+            jugador = false;
+        }
+        else {
+            tablero.Pon(Pieza.AZUL, y, x);
+            repaint();
+            jugador = true;
+        }
     }
 
     @Override
