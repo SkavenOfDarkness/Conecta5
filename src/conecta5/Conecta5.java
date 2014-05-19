@@ -60,18 +60,19 @@ public class Conecta5 extends JFrame implements MouseListener {
             x = e.getX()/54;
             y = e.getY()/54;
             comp = e.getComponent();
+            if(jugador) {
+                tablero.Pon(Pieza.ROJA, y, x);
+                repaint();
+                jugador = false;
+            }
+            else {
+                tablero.Pon(Pieza.AZUL, y, x);
+                repaint();
+                jugador = true;
+            }
         }
 //        System.out.println("X: " + x + " | Y: " + y + "         " + comp);
-        if(jugador) {
-            tablero.Pon(Pieza.ROJA, y, x);
-            repaint();
-            jugador = false;
-        }
-        else {
-            tablero.Pon(Pieza.AZUL, y, x);
-            repaint();
-            jugador = true;
-        }
+        
     }
 
     @Override
