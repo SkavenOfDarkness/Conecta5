@@ -52,4 +52,8 @@ public class Tablero extends JPanel {
     void Pon(String s, int i, int j) {
         t[i][j].setPieza(new Pieza(s));
     }
+
+    public boolean empty(int x, int y) {
+        return t[y][x].isOcupada();
+    } 
 }

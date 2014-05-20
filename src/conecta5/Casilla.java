@@ -37,4 +37,8 @@ public class Casilla {
         this.ocupada = true;
         this.pieza = p;
     }
+
+    public Boolean isOcupada() {
+        return ocupada;
+    }
 }

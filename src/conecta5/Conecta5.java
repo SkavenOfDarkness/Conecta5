@@ -54,25 +54,23 @@ public class Conecta5 extends JFrame implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x = 0, y = 0;
-        Component comp = null;
-        if(e.getButton() == MouseEvent.BUTTON1) {
+        int x, y;
+        if((e.getButton() == MouseEvent.BUTTON1)) {
             x = e.getX()/54;
             y = e.getY()/54;
-            comp = e.getComponent();
-            if(jugador) {
-                tablero.Pon(Pieza.ROJA, y, x);
-                repaint();
-                jugador = false;
-            }
-            else {
-                tablero.Pon(Pieza.AZUL, y, x);
-                repaint();
-                jugador = true;
+            if (!tablero.empty(x, y)) {
+                if(jugador) {
+                    tablero.Pon(Pieza.ROJA, y, x);
+                    repaint();
+                    jugador = false;
+                }
+                else {
+                    tablero.Pon(Pieza.AZUL, y, x);
+                    repaint();
+                    jugador = true;
+                }
             }
         }
-//        System.out.println("X: " + x + " | Y: " + y + "         " + comp);
-        
     }
 
     @Override
