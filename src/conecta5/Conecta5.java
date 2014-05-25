@@ -6,7 +6,6 @@
 
 package conecta5;
 
-import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
@@ -36,8 +35,6 @@ public class Conecta5 extends JFrame implements MouseListener {
 
     private void initComponents() {
         tablero = new Tablero();
-//        tablero.Pon(Pieza.ROJA, 0, 0);
-//        tablero.Pon(Pieza.AZUL, 1, 0);
         tablero.addMouseListener(this);
         this.getContentPane().add(tablero);
         this.setSize(tablero.getPreferredSize());
@@ -54,18 +51,18 @@ public class Conecta5 extends JFrame implements MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        int x, y;
+        int i, j;
         if((e.getButton() == MouseEvent.BUTTON1)) {
-            x = e.getX()/54;
-            y = e.getY()/54;
-            if (!tablero.empty(x, y)) {
+            j = e.getX()/54;
+            i = e.getY()/54;
+            if (!tablero.empty(i, j)) {
                 if(jugador) {
-                    tablero.Pon(Pieza.ROJA, y, x);
+                    tablero.Pon(Pieza.ROJA, i, j);
                     repaint();
                     jugador = false;
                 }
                 else {
-                    tablero.Pon(Pieza.AZUL, y, x);
+                    tablero.Pon(Pieza.AZUL, i, j);
                     repaint();
                     jugador = true;
                 }

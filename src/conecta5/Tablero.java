@@ -53,7 +53,7 @@ public class Tablero extends JPanel {
         t[i][j].setPieza(new Pieza(s));
     }
 
-    public boolean empty(int x, int y) {
-        return t[y][x].isOcupada();
+    public boolean empty(int i, int j) {
+        return t[i][j].isOcupada();
     } 
 }
