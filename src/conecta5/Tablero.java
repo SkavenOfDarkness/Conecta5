@@ -17,9 +17,9 @@ import javax.swing.JPanel;
  */
 public class Tablero extends JPanel { 
     private static final int TAMANO = 15;
-    private static final int MAXIMO = 810;
+    private static final int MAXIMO = 40*15;
     private static final int LADO = MAXIMO / TAMANO;
-    private Casilla t[][];
+    private final Casilla t[][];
     
     public Tablero() {
         t = new Casilla[TAMANO][TAMANO];
@@ -56,4 +56,12 @@ public class Tablero extends JPanel {
     public boolean empty(int i, int j) {
         return t[i][j].isOcupada();
     } 
+
+    /**
+     *
+     * @return
+     */
+    public int getMAXIMO() {
+        return MAXIMO;
+    }
 }

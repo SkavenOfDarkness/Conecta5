@@ -52,9 +52,10 @@ public class Conecta5 extends JFrame implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         int i, j;
-        if((e.getButton() == MouseEvent.BUTTON1)) {
-            j = e.getX()/54;
-            i = e.getY()/54;
+        
+        if((e.getButton() == MouseEvent.BUTTON1) && (e.getX() < tablero.getMAXIMO()) && (e.getY() < tablero.getMAXIMO())) {
+            j = e.getX()/40;
+            i = e.getY()/40;
             if (!tablero.empty(i, j)) {
                 if(jugador) {
                     tablero.Pon(Pieza.ROJA, i, j);
