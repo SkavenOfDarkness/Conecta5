@@ -6,9 +6,14 @@
 
 package conecta5;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -17,6 +22,13 @@ import javax.swing.JFrame;
 public class Conecta5 extends JFrame implements MouseListener {
 
     Tablero tablero;
+    
+    //Inicialización variables menú
+    private JMenuBar jmb;
+    private JMenu jmInicio;
+    private JMenu jmAyuda;
+    private JMenuItem jmiJugar, jmiPausa, jmiCancelar, jmiFinalizar;
+    
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     boolean jugador = true;
     
@@ -27,18 +39,91 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     public Conecta5() {
-        super("Conecta 5");
+        setSize((40*15)+300,(40*15)+55);
+        setTitle("Conecta 5");      
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
-        this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void initComponents() {
+        //Asignamos componentes del menú
+        jmb = new JMenuBar();
+        jmInicio = new JMenu();
+        jmAyuda = new JMenu();
+        jmiJugar = new JMenuItem();
+        jmiPausa = new JMenuItem();
+        jmiCancelar = new JMenuItem();
+        jmiFinalizar = new JMenuItem();
+        //Creamos el tableto
         tablero = new Tablero();
+        //Agregamos el escuchador al tablero para el ratón
         tablero.addMouseListener(this);
-        this.getContentPane().add(tablero);
-        this.setSize(tablero.getPreferredSize());
-        this.pack();
+        //Agregamos objetos al panel
+        getContentPane().setLayout(null);
+        getContentPane().add(jmb);
+        //getContentPane().add(tablero);
+        
+        //Agregamos funcionalidades al menú
+        jmiJugar.setText("Jugar");
+        jmiJugar.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                jmiJugarActionPerformed(evt);
+            }
+        });
+        
+        jmiPausa.setText("Pausa");
+        jmiPausa.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                jmiPausaActionPerformed(evt);
+            }   
+        });
+        
+        jmiCancelar.setText("Cancelar");
+        jmiCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                jmiCancelarActionPerformed(evt);
+            }   
+        });
+        
+        jmiFinalizar.setText("Finalizar");
+        jmiFinalizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                jmiFinalizarActionPerformed(evt);
+            }   
+        });
+        
+        //Ponemos nombre a las opciones de la barra de navegación y las agregamos
+        jmInicio.setText("Inicio");
+        jmInicio.add(jmiJugar);
+        jmInicio.add(jmiPausa);
+        jmInicio.add(jmiCancelar);
+        jmInicio.add(jmiFinalizar);
+        jmAyuda.setText("Ayuda");
+        jmb.add(jmInicio);
+        jmb.add(jmAyuda);
+        setJMenuBar(jmb);
+    }
+    
+    private void jmiJugarActionPerformed(ActionEvent evt) {
+        getContentPane().add(tablero);
+        tablero.setBounds(0, 0, 700, 700);
+    }
+    
+    private void jmiPausaActionPerformed(ActionEvent evt) {
+        
+    }
+    
+    private void jmiCancelarActionPerformed(ActionEvent evt) {
+        
+    }
+    
+    private void jmiFinalizarActionPerformed(ActionEvent evt) {
+        System.exit(0);
     }
 
     @Override
