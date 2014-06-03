@@ -11,9 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import static javax.swing.SwingConstants.RIGHT;
 
 /**
  *
@@ -28,6 +30,13 @@ public class Conecta5 extends JFrame implements MouseListener {
     private JMenu jmInicio;
     private JMenu jmAyuda;
     private JMenuItem jmiJugar, jmiPausa, jmiCancelar, jmiFinalizar;
+    
+    //Inicialización variables nombres jugadores
+    private static final String nombreJugador1 = "Jugador 1";
+    private static final String nombreJugador2 = "Jugador 2";
+    
+    //
+    private JLabel nombre1, nombre2;
     
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     boolean jugador = true;
@@ -55,14 +64,16 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa = new JMenuItem();
         jmiCancelar = new JMenuItem();
         jmiFinalizar = new JMenuItem();
+        
         //Creamos el tableto
         tablero = new Tablero();
+        
         //Agregamos el escuchador al tablero para el ratón
         tablero.addMouseListener(this);
+        
         //Agregamos objetos al panel
         getContentPane().setLayout(null);
         getContentPane().add(jmb);
-        //getContentPane().add(tablero);
         
         //Agregamos funcionalidades al menú
         jmiJugar.setText("Jugar");
@@ -112,6 +123,12 @@ public class Conecta5 extends JFrame implements MouseListener {
     private void jmiJugarActionPerformed(ActionEvent evt) {
         getContentPane().add(tablero);
         tablero.setBounds(0, 0, 700, 700);
+        nombre1 = new JLabel(nombreJugador1);
+        nombre2 = new JLabel(nombreJugador2);
+        getContentPane().add(nombre1);
+        nombre1.setBounds(650, 0, 100, 50);
+        getContentPane().add(nombre2);
+        nombre2.setBounds(650, 50, 100, 50);
     }
     
     private void jmiPausaActionPerformed(ActionEvent evt) {
@@ -137,7 +154,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         int i, j;
-        
+        //Permite que en caso de que se pulse fuera del tablero no ocurra nada
         if((e.getButton() == MouseEvent.BUTTON1) && (e.getX() < tablero.getMAXIMO()) && (e.getY() < tablero.getMAXIMO())) {
             j = e.getX()/40;
             i = e.getY()/40;
