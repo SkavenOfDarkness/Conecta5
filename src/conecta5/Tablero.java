@@ -64,4 +64,8 @@ public class Tablero extends JPanel {
     public int getMAXIMO() {
         return MAXIMO;
     }
+
+    public Casilla getT(int i, int j) {
+        return t[i][j];
+    }
 }

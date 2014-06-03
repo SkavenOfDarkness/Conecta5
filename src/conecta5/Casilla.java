@@ -18,11 +18,13 @@ public class Casilla {
     private Rectangle2D.Float cas;
     private Boolean ocupada;
     private Pieza pieza;
+    private String color;
     
     public Casilla(Rectangle2D.Float c) {
         this.cas = c;
         this.ocupada = false;
         this.pieza = null;
+        this.color = null;
     }
     
     public void paintComponent(Graphics g) {
@@ -40,5 +42,19 @@ public class Casilla {
 
     public Boolean isOcupada() {
         return ocupada;
+    }
+    public Pieza getPieza() {
+        return pieza;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public String getColor() {
+        return color;
+    }
+     @Override
+    public String toString() {
+        return "Casilla{" + "cas=" + cas + ", ocupada=" + ocupada + ", pieza=" + pieza + ", color=" + color + '}';
     }
 }
