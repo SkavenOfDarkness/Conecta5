@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import static javax.swing.SwingConstants.RIGHT;
 
 /**
@@ -88,7 +89,9 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                JOptionPane.showMessageDialog(null, "PAUSE", "Seguir jugando", JOptionPane.INFORMATION_MESSAGE);
                 jmiPausaActionPerformed(evt);
+                
             }   
         });
         
