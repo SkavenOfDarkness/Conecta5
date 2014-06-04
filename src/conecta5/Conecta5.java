@@ -170,12 +170,14 @@ public class Conecta5 extends JFrame implements MouseListener {
             if (!tablero.empty(i, j)) {
                 if(jugador) {
                     tablero.Pon(Pieza.ROJA, i, j);
+                    tablero.getT(i, j).setColor("ROJA");
                     Juego.Logica(tablero, i, j);
                     repaint();
                     jugador = false;
                 }
                 else {
                     tablero.Pon(Pieza.AZUL, i, j);
+                    tablero.getT(i, j).setColor("AZUL");
                     Juego.Logica(tablero, i, j);
                     repaint();
                     jugador = true;

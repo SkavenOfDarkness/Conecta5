@@ -19,7 +19,6 @@ public class Juego {
         //Fin limpieza pantalla
         
         String colorActual = ta.getT(i, j).getColor();  
-        
         //vertical comprobación
             for (int ii = 0; ii < 15; ii++) {                  
                 System.err.println("i " +ii + " j " +j + " field color "+ ta.getT(ii, j).getColor());
@@ -46,7 +45,7 @@ public class Juego {
             }
         //Fin comprobacion  horizontal
             
-            // i columna y j fila
+        // i columna y j fila
         //DiagonalI-D
             
             //FALLO EN COMBPROBACION EN LAS ULTIMAS FILAS
@@ -55,7 +54,7 @@ public class Juego {
             while(ii > 0 && jj > 0){
                 ii--;
                 jj--;
-            };
+            }
             //Recorrido diagonal desde punto de anicio.
             if (ii == 0){
                 //Recorremos mirando el limite del array
@@ -85,10 +84,7 @@ public class Juego {
                     ii++;
                     jj++;  
                 }
-            };
-            
-           
-        
+            }
         //Fin DiagonalI-D
             
         //DiagonalD-I
