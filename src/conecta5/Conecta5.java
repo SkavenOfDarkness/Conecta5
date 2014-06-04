@@ -16,7 +16,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import static javax.swing.SwingConstants.RIGHT;
 
 /**
  *
@@ -40,7 +39,9 @@ public class Conecta5 extends JFrame implements MouseListener {
     private JLabel nombre1, nombre2;
     
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
-    boolean jugador = true;
+    private boolean jugador = true;
+    //Variuable que permite saber si el juego esta en funcionamiento o no
+    private boolean jugando = false;
     
     //Programa principal, llama al constructor del juego y hace visible la ventana
     public static void main(String[] args) {
@@ -88,8 +89,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa.setText("Pausa");
         jmiPausa.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                JOptionPane.showMessageDialog(null, "PAUSE", "Seguir jugando", JOptionPane.INFORMATION_MESSAGE);
+            public void actionPerformed(ActionEvent evt) {     
                 jmiPausaActionPerformed(evt);
                 
             }   
@@ -132,14 +132,20 @@ public class Conecta5 extends JFrame implements MouseListener {
         nombre1.setBounds(650, 0, 100, 50);
         getContentPane().add(nombre2);
         nombre2.setBounds(650, 50, 100, 50);
+        //Variable que se encarga de saber si estamos jugando o no
+        jugando = true;
     }
     
     private void jmiPausaActionPerformed(ActionEvent evt) {
-        
+        if(jugando) {
+            JOptionPane.showMessageDialog(null, "Pulse aceptar para seguir jugando", "PAUSA", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
     
     private void jmiCancelarActionPerformed(ActionEvent evt) {
-        
+        if(jugando) {
+            
+        }
     }
     
     private void jmiFinalizarActionPerformed(ActionEvent evt) {
