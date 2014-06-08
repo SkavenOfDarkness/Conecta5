@@ -32,8 +32,8 @@ public class Conecta5 extends JFrame implements MouseListener {
     private JMenuItem jmiJugar, jmiPausa, jmiCancelar, jmiFinalizar;
     
     //Inicialización variables nombres jugadores
-    private static final String nombreJugador1 = "Jugador 1";
-    private static final String nombreJugador2 = "Jugador 2";
+    public static  String nombreJugador1 = "Jugador 1";
+    public static  String nombreJugador2 = "Jugador 2";
     
     //
     private JLabel nombre1, nombre2;
@@ -126,6 +126,10 @@ public class Conecta5 extends JFrame implements MouseListener {
     private void jmiJugarActionPerformed(ActionEvent evt) {
         getContentPane().add(tablero);
         tablero.setBounds(0, 0, 700, 700);
+        //Mostrar lista de jugadores
+        ListadoJugadores ListadoJugadores = new ListadoJugadores();
+        ListadoJugadores.setVisible(true);
+
         nombre1 = new JLabel(nombreJugador1);
         nombre2 = new JLabel(nombreJugador2);
         getContentPane().add(nombre1);
@@ -134,6 +138,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         nombre2.setBounds(650, 50, 100, 50);
         //Variable que se encarga de saber si estamos jugando o no
         jugando = true;
+   
     }
     
     private void jmiPausaActionPerformed(ActionEvent evt) {

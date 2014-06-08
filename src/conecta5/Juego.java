@@ -19,7 +19,9 @@ public class Juego {
         //Fin limpieza pantalla
         
         String colorActual = ta.getT(i, j).getColor();  
-        //vertical comprobación
+            //////////////////////////
+            //vertical comprobación//
+            /////////////////////////
             for (int ii = 0; ii < 15; ii++) {                  
                 System.err.println("i " +ii + " j " +j + " field color "+ ta.getT(ii, j).getColor());
                 if((ta.getT(ii, j).getColor() == null) ||  !(colorActual.equalsIgnoreCase(ta.getT(ii, j).getColor()))){
@@ -30,9 +32,11 @@ public class Juego {
                    System.err.println("Contador Global suma (Vertical): " +GlobalContadorV);                   
                 }
             }
-        //Fin comprobacion vertical 
+            //Fin comprobacion vertical 
             
-        //horizontal comprobación
+            ////////////////////////////
+            //horizontal comprobación//
+            ///////////////////////////
             for(int jj = 0; jj < 15; jj++){
                 System.err. println("i " + i + " j " + jj + " field color "+ ta.getT(i, jj).getColor());
                 if ((ta.getT(i,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(i, jj).getColor()))){
@@ -43,24 +47,23 @@ public class Juego {
                     System.err.println("Contador Global suma (Horizontal): " +GlobalContadorH);
                 }
             }
-        //Fin comprobacion  horizontal
+            //Fin comprobacion  horizontal
             
-        // i columna y j fila
-        //DiagonalI-D       
+            // i columna y j fila
             
+            ////////////////
+            //Diagonal I-D//       
+            ///////////////
             int ii = i, jj = j;
             //Ir a punto de inicio de busqueda de la diagonal I-D
             while(ii > 0 && jj > 0){
                 ii--;
                 jj--;               
             }
-            
             //Recorrido diagonal desde punto de inicio.
             if (ii == 0){
-                
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
-                
                 //Recorremos mirando el limite del array
                 for (int k = 0; k < 14-delimitanteJ; k++,ii++,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
@@ -88,27 +91,33 @@ public class Juego {
                     }
                 }
             }  
-        //Fin DiagonalI-D
+            //Fin DiagonalI-D
             
-        // FALLO EN DELIMITACION DEL TABLERO, REVISAR LOGICA LATERAL
-        //DiagonalD-I
-        while(ii < 14 && jj < 14){
-           ii++;
-           jj++;               
-            }
+           
+            // FALLO EN DELIMITACION DEL TABLERO, REVISAR LOGICA LATERAL
             
-            ////
-        //Recorrido diagonal desde punto de inicio.
+            ////////////////
+            //DiagonalD-I//
+            ///////////////
+            ii = i;
+            jj = j;
+            while(ii < 14 && jj > 0){
+               ii++;
+               jj--;               
+                }
+
+                ////
+            //Recorrido diagonal desde punto de inicio.
             if (ii == 14){
-                
+
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
-                
                 //Recorremos mirando el limite del array
-                for (int k = 0; k < 14-delimitanteJ; k++,ii--,jj--) {
+                for (int k = 0; k < 14-delimitanteJ; k++,ii--,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
                     if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         GlobalContadorH = 0;
+                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)" + GlobalContadorH);
                     }
                     //Comprobación que el color concuerda con el de ese momento
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
@@ -117,26 +126,22 @@ public class Juego {
                     } 
                 }
             }
-            else if (jj == 14){
+            else if (jj == 0){
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
-                for (int f = 0; f < 14-delimitanteI; f++,ii--,jj--) {
+                for (int f = 0; f < 14-delimitanteI; f++,ii--,jj++) {
                   if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         GlobalContadorH = 0;
+                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)"+ GlobalContadorH);
                     }
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
                         GlobalContadorH++;
-                        System.err.println("Contador Global suma (Diasgonal D-I): " +GlobalContadorH);
+                       System.err.println("Contador Global suma (Diasgonal D-I): " +GlobalContadorH);
                     }
                 }
             }  
-            
-            
-        //Fin DiagonaD-I
-            
-            
-            
+            //Fin DiagonaD-I
    }
 }
     
