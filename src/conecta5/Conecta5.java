@@ -81,7 +81,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiJugar.setText("Jugar");
         jmiJugar.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent evt) {
+            public void actionPerformed(ActionEvent evt) {               
                 jmiJugarActionPerformed(evt);
             }
         });
@@ -89,9 +89,11 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa.setText("Pausa");
         jmiPausa.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {     
+            public void actionPerformed(ActionEvent evt) {                               
+                //play( getDocumentBase(),"sonido.au" );
+                sonido.Spausar.play();
                 jmiPausaActionPerformed(evt);
-                
+                sonido.Sreanudar.play();
             }   
         });
         
@@ -99,6 +101,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+                sonido.Scancelar.play();
                 jmiCancelarActionPerformed(evt);
             }   
         });
@@ -107,7 +110,8 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiFinalizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                jmiFinalizarActionPerformed(evt);
+                sonido.Sfinalizar.play();
+                jmiFinalizarActionPerformed(evt);               
             }   
         });
         
@@ -125,7 +129,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
         if(!jugando){
-            String[] listaNombres = { "Javier", "Luis", "Antonio"};
+            String[] listaNombres = { "Javier", "Luis", "Antonio","Jose","Adolfo","Pepe","Jesus"};
             //Petición mediante panel del nombre de los usuarios
             nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
             nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
@@ -153,7 +157,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     private void jmiPausaActionPerformed(ActionEvent evt) {
-        if(jugando) {
+        if(jugando) {              
             JOptionPane.showMessageDialog(null, "Pulse aceptar para seguir jugando", "PAUSA", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -189,6 +193,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     tablero.getT(i, j).setColor("ROJA");
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
+                        sonido.SGanador.play();
                         JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                     }
                     repaint();
@@ -199,6 +204,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     tablero.getT(i, j).setColor("AZUL");
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
+                        sonido.SGanador.play();
                         JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                     }
                     repaint();
