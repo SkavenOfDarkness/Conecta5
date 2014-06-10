@@ -7,8 +7,7 @@ package conecta5;
  * @author Javier & Luis
  */
 public class Juego {
-//public static Casilla table[][] = new Casilla[15][15];
-    public static int ContadorAzul = 0, ContadorRojo = 0, GlobalContadorV = 0, GlobalContadorH = 0;
+    private static int GlobalContadorH = 0;
     
     
     public static void Logica(Tablero ta, int i, int j){     
@@ -22,14 +21,15 @@ public class Juego {
             //////////////////////////
             //vertical comprobación//
             /////////////////////////
+            GlobalContadorH = 0;
             for (int ii = 0; ii < 15; ii++) {                  
                 System.err.println("i " +ii + " j " +j + " field color "+ ta.getT(ii, j).getColor());
                 if((ta.getT(ii, j).getColor() == null) ||  !(colorActual.equalsIgnoreCase(ta.getT(ii, j).getColor()))){
-                   GlobalContadorV = 0;
+                   GlobalContadorH = 0;
                 }
                 else if (colorActual.equalsIgnoreCase(ta.getT(ii, j).getColor())){
-                   GlobalContadorV++;
-                   System.err.println("Contador Global suma (Vertical): " +GlobalContadorV);                   
+                   GlobalContadorH++;
+                   System.err.println("Contador Global suma (Vertical): " +GlobalContadorH);                   
                 }
             }
             //Fin comprobacion vertical 
@@ -37,6 +37,7 @@ public class Juego {
             ////////////////////////////
             //horizontal comprobación//
             ///////////////////////////
+            GlobalContadorH = 0;
             for(int jj = 0; jj < 15; jj++){
                 System.err. println("i " + i + " j " + jj + " field color "+ ta.getT(i, jj).getColor());
                 if ((ta.getT(i,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(i, jj).getColor()))){
@@ -62,6 +63,7 @@ public class Juego {
             }
             //Recorrido diagonal desde punto de inicio.
             if (ii == 0){
+                GlobalContadorH = 0;
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
                 //Recorremos mirando el limite del array
@@ -78,6 +80,7 @@ public class Juego {
                 }
             }
             else if (jj == 0){
+                GlobalContadorH = 0;
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
@@ -104,16 +107,16 @@ public class Juego {
             while(ii < 14 && jj > 0){
                ii++;
                jj--;               
-                }
+            }
 
                 ////
             //Recorrido diagonal desde punto de inicio.
             if (ii == 14){
-
+                GlobalContadorH = 0;
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
                 //Recorremos mirando el limite del array
-                for (int k = 0; k < 14-delimitanteJ; k++,ii--,jj++) {
+                for (int k = 0; k < 15-delimitanteJ; k++,ii--,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
                     if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         GlobalContadorH = 0;
@@ -127,10 +130,11 @@ public class Juego {
                 }
             }
             else if (jj == 0){
+                GlobalContadorH = 0;
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
-                for (int f = 0; f < 14-delimitanteI; f++,ii--,jj++) {
+                for (int f = 0; f <= delimitanteI; f++,ii--,jj++) {
                   if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         GlobalContadorH = 0;
                         System.out.println("Contador Global se reseta a 0 (Diagonal D-I)"+ GlobalContadorH);
@@ -141,6 +145,7 @@ public class Juego {
                     }
                 }
             }  
+            
             //Fin DiagonaD-I
    }
 }

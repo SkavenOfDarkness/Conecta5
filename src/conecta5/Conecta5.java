@@ -124,33 +124,34 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
-        String[] listaNombres = { "Javier", "Luis", "Antonio"};
-        //Petición mediante panel del nombre de los usuarios
-        nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
-        nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
-        //Comprobacion en caso de pulsar cancelar
-        if(nombreJugador1==null){
-            nombreJugador1= "Jugador 1";
-        }
-        if(nombreJugador2==null){
-            nombreJugador2= "Jugador 2";
-        }
-        //Necesario para pintar los componentes de nombre
-        repaint();
-         
-        getContentPane().add(tablero);
-        tablero.setBounds(0, 0, 700, 700);
-        
+        if(!jugando){
+            String[] listaNombres = { "Javier", "Luis", "Antonio"};
+            //Petición mediante panel del nombre de los usuarios
+            nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+            nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+            //Comprobacion en caso de pulsar cancelar
+            if(nombreJugador1==null){
+                nombreJugador1= "Jugador 1";
+            }
+            if(nombreJugador2==null){
+                nombreJugador2= "Jugador 2";
+            }
+            //Necesario para pintar los componentes de nombre
+            repaint();
 
-        nombre1 = new JLabel(nombreJugador1);
-        nombre2 = new JLabel(nombreJugador2);
-        getContentPane().add(nombre1);
-        nombre1.setBounds(650, 0, 100, 50);
-        getContentPane().add(nombre2);
-        nombre2.setBounds(650, 50, 100, 50);
-        //Variable que se encarga de saber si estamos jugando o no
-        jugando = true;
-   
+            getContentPane().add(tablero);
+            tablero.setBounds(0, 0, 700, 700);
+
+
+            nombre1 = new JLabel(nombreJugador1);
+            nombre2 = new JLabel(nombreJugador2);
+            getContentPane().add(nombre1);
+            nombre1.setBounds(650, 0, 100, 50);
+            getContentPane().add(nombre2);
+            nombre2.setBounds(650, 50, 100, 50);
+            //Variable que se encarga de saber si estamos jugando o no
+            jugando = true;
+        }
     }
     
     private void jmiPausaActionPerformed(ActionEvent evt) {
