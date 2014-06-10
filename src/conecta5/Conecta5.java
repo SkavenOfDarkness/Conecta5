@@ -32,8 +32,8 @@ public class Conecta5 extends JFrame implements MouseListener {
     private JMenuItem jmiJugar, jmiPausa, jmiCancelar, jmiFinalizar;
     
     //Inicialización variables nombres jugadores
-    public static  String nombreJugador1 = "Jugador 1";
-    public static  String nombreJugador2 = "Jugador 2";
+    private static  String nombreJugador1;
+    private static  String nombreJugador2;
     
     //
     private JLabel nombre1, nombre2;
@@ -50,7 +50,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     public Conecta5() {
-        setSize((40*15)+300,(40*15)+55);
+        setSize((40*15)+300,(40*15)+60);
         setTitle("Conecta 5");      
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,11 +124,23 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
+        String[] listaNombres = { "Javier", "Luis", "Antonio"};
+        //Petición mediante panel del nombre de los usuarios
+        nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+        nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+        //Comprobacion en caso de pulsar cancelar
+        if(nombreJugador1==null){
+            nombreJugador1= "Jugador 1";
+        }
+        if(nombreJugador2==null){
+            nombreJugador2= "Jugador 2";
+        }
+        //Necesario para pintar los componentes de nombre
+        repaint();
+         
         getContentPane().add(tablero);
         tablero.setBounds(0, 0, 700, 700);
-        //Mostrar lista de jugadores
-        ListadoJugadores ListadoJugadores = new ListadoJugadores();
-        ListadoJugadores.setVisible(true);
+        
 
         nombre1 = new JLabel(nombreJugador1);
         nombre2 = new JLabel(nombreJugador2);
@@ -197,5 +209,24 @@ public class Conecta5 extends JFrame implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    
+    // Setter y Getter de nombre de los jugadores
+    
+    public static String getNombreJugador1() {
+        return nombreJugador1;
+    }
+
+    public static void setNombreJugador1(String nombreJugador1) {
+        Conecta5.nombreJugador1 = nombreJugador1;
+    }
+
+    public static String getNombreJugador2() {
+        return nombreJugador2;
+    }
+
+    public static void setNombreJugador2(String nombreJugador2) {
+        Conecta5.nombreJugador2 = nombreJugador2;
     }
 }
