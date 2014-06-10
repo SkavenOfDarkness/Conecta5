@@ -7,10 +7,10 @@ package conecta5;
  * @author Javier & Luis
  */
 public class Juego {
-    private static int GlobalContadorH = 0;
+    private static int Contador5 = 0;
     
     
-    public static void Logica(Tablero ta, int i, int j){     
+    public static boolean Logica(Tablero ta, int i, int j){     
         //Limpia pantalla
         for (int k = 0; k < 5; k++) {
             System.out.println("");
@@ -21,15 +21,18 @@ public class Juego {
             //////////////////////////
             //vertical comprobación//
             /////////////////////////
-            GlobalContadorH = 0;
+            Contador5 = 0;
             for (int ii = 0; ii < 15; ii++) {                  
                 System.err.println("i " +ii + " j " +j + " field color "+ ta.getT(ii, j).getColor());
                 if((ta.getT(ii, j).getColor() == null) ||  !(colorActual.equalsIgnoreCase(ta.getT(ii, j).getColor()))){
-                   GlobalContadorH = 0;
+                   Contador5 = 0;
                 }
                 else if (colorActual.equalsIgnoreCase(ta.getT(ii, j).getColor())){
-                   GlobalContadorH++;
-                   System.err.println("Contador Global suma (Vertical): " +GlobalContadorH);                   
+                   Contador5++;
+                   System.err.println("Contador Global suma (Vertical): " +Contador5);
+                   if(Contador5 == 5) {
+                       return true;
+                   }
                 }
             }
             //Fin comprobacion vertical 
@@ -37,15 +40,18 @@ public class Juego {
             ////////////////////////////
             //horizontal comprobación//
             ///////////////////////////
-            GlobalContadorH = 0;
+            Contador5 = 0;
             for(int jj = 0; jj < 15; jj++){
                 System.err. println("i " + i + " j " + jj + " field color "+ ta.getT(i, jj).getColor());
                 if ((ta.getT(i,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(i, jj).getColor()))){
-                    GlobalContadorH = 0;
+                    Contador5 = 0;
                 }
                 else if (colorActual.equalsIgnoreCase(ta.getT(i, jj).getColor())){
-                    GlobalContadorH++;
-                    System.err.println("Contador Global suma (Horizontal): " +GlobalContadorH);
+                    Contador5++;
+                    System.err.println("Contador Global suma (Horizontal): " +Contador5);
+                    if(Contador5 == 5) {
+                       return true;
+                   }
                 }
             }
             //Fin comprobacion  horizontal
@@ -63,34 +69,40 @@ public class Juego {
             }
             //Recorrido diagonal desde punto de inicio.
             if (ii == 0){
-                GlobalContadorH = 0;
+                Contador5 = 0;
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
                 //Recorremos mirando el limite del array
                 for (int k = 0; k < 14-delimitanteJ; k++,ii++,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
                     if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
-                        GlobalContadorH = 0;
+                        Contador5 = 0;
                     }
                     //Comprobación que el color concuerda con el de ese momento
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
-                        GlobalContadorH++;
-                        System.err.println("Contador Global suma (Diagonal I-D): " +GlobalContadorH);
+                        Contador5++;
+                        System.err.println("Contador Global suma (Diagonal I-D): " +Contador5);
+                        if(Contador5 == 5) {
+                       return true;
+                   }
                     } 
                 }
             }
             else if (jj == 0){
-                GlobalContadorH = 0;
+                Contador5 = 0;
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
                 for (int f = 0; f < 14-delimitanteI; f++,ii++,jj++) {
                   if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
-                        GlobalContadorH = 0;
+                        Contador5 = 0;
                     }
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
-                        GlobalContadorH++;
-                        System.err.println("Contador Global suma (Diasgonal I-D): " +GlobalContadorH);
+                        Contador5++;
+                        System.err.println("Contador Global suma (Diasgonal I-D): " +Contador5);
+                        if(Contador5 == 5) {
+                       return true;
+                   }
                     }
                 }
             }  
@@ -112,41 +124,49 @@ public class Juego {
                 ////
             //Recorrido diagonal desde punto de inicio.
             if (ii == 14){
-                GlobalContadorH = 0;
+                Contador5 = 0;
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
                 //Recorremos mirando el limite del array
                 for (int k = 0; k < 15-delimitanteJ; k++,ii--,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
                     if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
-                        GlobalContadorH = 0;
-                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)" + GlobalContadorH);
+                        Contador5 = 0;
+                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)" + Contador5);
                     }
                     //Comprobación que el color concuerda con el de ese momento
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
-                        GlobalContadorH++;
-                        System.err.println("Contador Global suma (Diagonal D-I): " +GlobalContadorH);
+                        Contador5++;
+                        System.err.println("Contador Global suma (Diagonal D-I): " +Contador5);
+                        if(Contador5 == 5) {
+                       return true;
+                   }
                     } 
                 }
             }
             else if (jj == 0){
-                GlobalContadorH = 0;
+                Contador5 = 0;
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
                 for (int f = 0; f <= delimitanteI; f++,ii--,jj++) {
                   if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
-                        GlobalContadorH = 0;
-                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)"+ GlobalContadorH);
+                        Contador5 = 0;
+                        System.out.println("Contador Global se reseta a 0 (Diagonal D-I)"+ Contador5);
                     }
                     else if (colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor())){
-                        GlobalContadorH++;
-                       System.err.println("Contador Global suma (Diasgonal D-I): " +GlobalContadorH);
+                        Contador5++;
+                       System.err.println("Contador Global suma (Diasgonal D-I): " +Contador5);
+                       if(Contador5 == 5) {
+                            return true;
+                        }
                     }
                 }
-            }  
-            
+            }   
             //Fin DiagonaD-I
+            
+            //En caso de no encontrar cinco fichas seguidas devuelve un false
+            return false;
    }
 }
     

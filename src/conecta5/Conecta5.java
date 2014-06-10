@@ -141,8 +141,6 @@ public class Conecta5 extends JFrame implements MouseListener {
 
             getContentPane().add(tablero);
             tablero.setBounds(0, 0, 700, 700);
-
-
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
             getContentPane().add(nombre1);
@@ -189,14 +187,20 @@ public class Conecta5 extends JFrame implements MouseListener {
                 if(jugador) {
                     tablero.Pon(Pieza.ROJA, i, j);
                     tablero.getT(i, j).setColor("ROJA");
-                    Juego.Logica(tablero, i, j);
+                    //Nos ha de devolver un true o un false
+                    if(Juego.Logica(tablero, i, j)) {
+                        JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     repaint();
                     jugador = false;
                 }
                 else {
                     tablero.Pon(Pieza.AZUL, i, j);
                     tablero.getT(i, j).setColor("AZUL");
-                    Juego.Logica(tablero, i, j);
+                    //Nos ha de devolver un true o un false
+                    if(Juego.Logica(tablero, i, j)) {
+                        JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                    }
                     repaint();
                     jugador = true;
                 }
@@ -210,24 +214,5 @@ public class Conecta5 extends JFrame implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
-    }
-
-    
-    // Setter y Getter de nombre de los jugadores
-    
-    public static String getNombreJugador1() {
-        return nombreJugador1;
-    }
-
-    public static void setNombreJugador1(String nombreJugador1) {
-        Conecta5.nombreJugador1 = nombreJugador1;
-    }
-
-    public static String getNombreJugador2() {
-        return nombreJugador2;
-    }
-
-    public static void setNombreJugador2(String nombreJugador2) {
-        Conecta5.nombreJugador2 = nombreJugador2;
     }
 }
