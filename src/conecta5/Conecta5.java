@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -34,10 +35,12 @@ public class Conecta5 extends JFrame implements MouseListener {
     //Inicialización variables nombres jugadores
     private static  String nombreJugador1;
     private static  String nombreJugador2;
+    public int ContadorFichas  = 0;
+    
     
     //
-    private JLabel nombre1, nombre2;
-    
+    private JLabel nombre1, nombre2,puntuacion;
+  
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     private boolean jugador = true;
     //Variuable que permite saber si el juego esta en funcionamiento o no
@@ -148,13 +151,20 @@ public class Conecta5 extends JFrame implements MouseListener {
 
             getContentPane().add(tablero);
             tablero.setBounds(0, 0, 700, 700);
-            //añadir fotos de las ficha de cada jugador
+            //añadir fotos de las ficha de cada jugador          
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
+            puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
+            
+            nombre1.setIcon(new ImageIcon("img/roja.png"));
+            nombre2.setIcon(new ImageIcon("img/azul.png"));
+            
             getContentPane().add(nombre1);
             nombre1.setBounds(650, 0, 100, 50);
             getContentPane().add(nombre2);
             nombre2.setBounds(650, 50, 100, 50);
+            getContentPane().add(puntuacion);
+            puntuacion.setBounds(650, 100, 100, 50);
             //Variable que se encarga de saber si estamos jugando o no
             jugando = true;
         }
@@ -197,12 +207,15 @@ public class Conecta5 extends JFrame implements MouseListener {
                     tablero.getT(i, j).setColor("ROJA");
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
-                        sonido.SGanador.play();
+                        sonido.sonido("ganador");                       
                         sonido.sonido(nombreJugador1);
                         JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    repaint();
+                    } 
                     jugador = false;
+                    ContadorFichas++;
+                    puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
+                    repaint();
+                    
                 }
                 else {
                     tablero.Pon(Pieza.AZUL, i, j);
@@ -213,8 +226,11 @@ public class Conecta5 extends JFrame implements MouseListener {
                         sonido.sonido(nombreJugador2);
                         JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                     }
-                    repaint();
+                    
                     jugador = true;
+                    ContadorFichas++;
+                    puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
+                    repaint();
                 }
             }
         }

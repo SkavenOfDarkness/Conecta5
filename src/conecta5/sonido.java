@@ -29,16 +29,19 @@ public class sonido {
     private static Clip clip;
 
     public static  void sonido(String args){
+        System.out.println("sonidos/"+args+".wav");
       AudioClip localizar = Applet.newAudioClip(sonido.class.getResource("sonidos/"+args+".wav"));
         try{
-                clip=AudioSystem.getClip();
-                clip.open((AudioInputStream) localizar);
-                clip.start();
+            /* clip=AudioSystem.getClip();
+             clip.open(localizar.);
+             clip.start();*/
+            localizar.play();
+
            }
            catch(Exception ex){
                 System.err.println( ex.getMessage() );
            }
-        }
+        }   
     //FIN DE CODIGO PARA EJECUTAR POR PARAMETROS EL FICHERO DESEHADO
     }
 
