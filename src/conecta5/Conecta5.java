@@ -198,6 +198,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
                         sonido.SGanador.play();
+                        sonido.sonido(nombreJugador1);
                         JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                     }
                     repaint();
@@ -209,6 +210,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
                         sonido.SGanador.play();
+                        sonido.sonido(nombreJugador2);
                         JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                     }
                     repaint();
