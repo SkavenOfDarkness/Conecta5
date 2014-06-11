@@ -94,6 +94,8 @@ public class Conecta5 extends JFrame implements MouseListener {
                 sonido.Spausar.play();
                 jmiPausaActionPerformed(evt);
                 sonido.Sreanudar.play();
+                
+                
             }   
         });
         
@@ -111,6 +113,7 @@ public class Conecta5 extends JFrame implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 sonido.Sfinalizar.play();
+                
                 jmiFinalizarActionPerformed(evt);               
             }   
         });
@@ -145,6 +148,7 @@ public class Conecta5 extends JFrame implements MouseListener {
 
             getContentPane().add(tablero);
             tablero.setBounds(0, 0, 700, 700);
+            //añadir fotos de las ficha de cada jugador
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
             getContentPane().add(nombre1);
