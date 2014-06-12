@@ -194,7 +194,8 @@ public class Conecta5 extends JFrame implements MouseListener {
                 getContentPane().remove(tablero);
                 getContentPane().revalidate();
                 getContentPane().repaint();
-                jugando = false;
+                ContadorFichas = 0;
+                jugando = false;             
             }
         }
     }
