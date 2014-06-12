@@ -38,8 +38,8 @@ public class Conecta5 extends JFrame implements MouseListener {
     public int ContadorFichas  = 0;
     
     
-    //
-    private JLabel nombre1, nombre2,puntuacion;
+    //JLabel que contine el nombre de los jugadores y la puntuación
+    private JLabel nombre1, nombre2, puntuacion;
   
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     private boolean jugador = true;
@@ -69,13 +69,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa = new JMenuItem();
         jmiCancelar = new JMenuItem();
         jmiFinalizar = new JMenuItem();
-        
-        //Creamos el tableto
-        tablero = new Tablero();
-        
-        //Agregamos el escuchador al tablero para el ratón
-        tablero.addMouseListener(this);
-        
+
         //Agregamos objetos al panel
         getContentPane().setLayout(null);
         getContentPane().add(jmb);
@@ -106,7 +100,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                sonido.Scancelar.play();
+                
                 jmiCancelarActionPerformed(evt);
             }   
         });
@@ -116,7 +110,6 @@ public class Conecta5 extends JFrame implements MouseListener {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 sonido.Sfinalizar.play();
-                
                 jmiFinalizarActionPerformed(evt);               
             }   
         });
@@ -135,10 +128,19 @@ public class Conecta5 extends JFrame implements MouseListener {
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
         if(!jugando){
+            //Creamos el tableto
+            tablero = new Tablero();
+
+            //Agregamos el escuchador al tablero para el ratón
+            tablero.addMouseListener(this);
+            
+            //Lista de los nombres para elegir
             String[] listaNombres = { "Javier", "Luis", "Antonio","Jose","Adolfo","Pepe","Jesus"};
+            
             //Petición mediante panel del nombre de los usuarios
             nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
             nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+            
             //Comprobacion en caso de pulsar cancelar
             if(nombreJugador1==null){
                 nombreJugador1= "Jugador 1";
@@ -146,6 +148,7 @@ public class Conecta5 extends JFrame implements MouseListener {
             if(nombreJugador2==null){
                 nombreJugador2= "Jugador 2";
             }
+            
             //Necesario para pintar los componentes de nombre
             repaint();
 
@@ -178,7 +181,21 @@ public class Conecta5 extends JFrame implements MouseListener {
     
     private void jmiCancelarActionPerformed(ActionEvent evt) {
         if(jugando) {
-            
+            /*La opcion YES_NO_OPTION devuelve:
+                                            0 al pulsar si
+                                            1 al pulsar no
+                                            -1 al pulsar la curz*/
+            int opcion = JOptionPane.showConfirmDialog(null, "Desea cancelar la partida?", "Cancelando", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(opcion == 0) {
+                sonido.Scancelar.play();
+                getContentPane().remove(nombre1);
+                getContentPane().remove(nombre2);
+                getContentPane().remove(puntuacion);
+                getContentPane().remove(tablero);
+                getContentPane().revalidate();
+                getContentPane().repaint();
+                jugando = false;
+            }
         }
     }
     
