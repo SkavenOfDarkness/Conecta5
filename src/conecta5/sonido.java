@@ -7,13 +7,7 @@ package conecta5;
 
 import java.applet.Applet;
 import java.applet.AudioClip;
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
+
 
 /**
  *
@@ -25,17 +19,17 @@ public class sonido {
     public static final AudioClip Spausar = Applet.newAudioClip(sonido.class.getResource("sonidos/partida_pausada.wav"));
     public static final AudioClip Scancelar = Applet.newAudioClip(sonido.class.getResource("sonidos/partida_cancelada.wav"));
     public static final AudioClip Sreanudar = Applet.newAudioClip(sonido.class.getResource("sonidos/reanudacion_partida.wav"));
-    public static final AudioClip SGanador = Applet.newAudioClip(sonido.class.getResource("sonidos/ganador.wav"));
-    private static Clip clip;
+    //public static final AudioClip SGanador = Applet.newAudioClip(sonido.class.getResource("sonidos/ganador.wav"));
+    //private static Clip clip;
 
     public static  void sonido(String args){
-        System.out.println("sonidos/"+args+".wav");
-      AudioClip localizar = Applet.newAudioClip(sonido.class.getResource("sonidos/"+args+".wav"));
+      System.out.println("sonidos/"+args+".wav");
+      AudioClip archivo = Applet.newAudioClip(sonido.class.getResource("sonidos/"+args+".wav"));
         try{
             /* clip=AudioSystem.getClip();
              clip.open(localizar.);
              clip.start();*/
-            localizar.play();
+            archivo.play();
 
            }
            catch(Exception ex){

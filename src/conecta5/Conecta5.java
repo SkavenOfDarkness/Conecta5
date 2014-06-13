@@ -39,7 +39,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     
     
     //JLabel que contine el nombre de los jugadores y la puntuación
-    private JLabel nombre1, nombre2, puntuacion;
+    private JLabel nombre1, nombre2, puntuacion, background;
   
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     private boolean jugador = true;
@@ -151,23 +151,30 @@ public class Conecta5 extends JFrame implements MouseListener {
             
             //Necesario para pintar los componentes de nombre
             repaint();
+           
 
+            
             getContentPane().add(tablero);
             tablero.setBounds(0, 0, 700, 700);
             //añadir fotos de las ficha de cada jugador          
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
             puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
-            
-            nombre1.setIcon(new ImageIcon("img/roja.png"));
-            nombre2.setIcon(new ImageIcon("img/azul.png"));
-            
+            nombre1.setIcon(new ImageIcon(Pieza.ROJA));
+            nombre2.setIcon(new ImageIcon(Pieza.AZUL));
+
             getContentPane().add(nombre1);
             nombre1.setBounds(650, 0, 100, 50);
             getContentPane().add(nombre2);
             nombre2.setBounds(650, 50, 100, 50);
             getContentPane().add(puntuacion);
             puntuacion.setBounds(650, 100, 100, 50);
+            
+            background = new JLabel(); 
+            background.setIcon(new ImageIcon("img/background.png"));
+            getContentPane().add(background);
+            background.setBounds(0, 0, 600, 600);
+            
             //Variable que se encarga de saber si estamos jugando o no
             jugando = true;
         }
@@ -223,32 +230,33 @@ public class Conecta5 extends JFrame implements MouseListener {
                 if(jugador) {
                     tablero.Pon(Pieza.ROJA, i, j);
                     tablero.getT(i, j).setColor("ROJA");
-                    //Nos ha de devolver un true o un false
-                    if(Juego.Logica(tablero, i, j)) {
-                        sonido.sonido("ganador");                       
-                        sonido.sonido(nombreJugador1);
-                        JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
-                    } 
                     jugador = false;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
                     repaint();
+                    //Nos ha de devolver un true o un false
+                    if(Juego.Logica(tablero, i, j)) {
+                        System.out.println("nombre ganador: " + nombreJugador1);                     
+                        sonido.sonido(nombreJugador1);
+                        JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarTablero();
+                    } 
                     
                 }
                 else {
                     tablero.Pon(Pieza.AZUL, i, j);
                     tablero.getT(i, j).setColor("AZUL");
-                    //Nos ha de devolver un true o un false
-                    if(Juego.Logica(tablero, i, j)) {
-                        sonido.SGanador.play();
-                        sonido.sonido(nombreJugador2);
-                        JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    
                     jugador = true;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
                     repaint();
+                    //Nos ha de devolver un true o un false
+                    if(Juego.Logica(tablero, i, j)) {
+                        System.out.println("nombre ganador: " +nombreJugador2);
+                        sonido.sonido(nombreJugador2);
+                        JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                        limpiarTablero();
+                    }
                 }
             }
         }
@@ -261,4 +269,16 @@ public class Conecta5 extends JFrame implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
+    
+    public void limpiarTablero(){
+                getContentPane().remove(nombre1);
+                getContentPane().remove(nombre2);
+                getContentPane().remove(puntuacion);
+                getContentPane().remove(tablero);
+                getContentPane().revalidate();
+                getContentPane().repaint();
+                ContadorFichas = 0;
+                jugando = false;
+    }
+    
 }
