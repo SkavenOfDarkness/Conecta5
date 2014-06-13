@@ -195,14 +195,7 @@ public class Conecta5 extends JFrame implements MouseListener {
             int opcion = JOptionPane.showConfirmDialog(null, "Desea cancelar la partida?", "Cancelando", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(opcion == 0) {
                 sonido.Scancelar.play();
-                getContentPane().remove(nombre1);
-                getContentPane().remove(nombre2);
-                getContentPane().remove(puntuacion);
-                getContentPane().remove(tablero);
-                getContentPane().revalidate();
-                getContentPane().repaint();
-                ContadorFichas = 0;
-                jugando = false;             
+                limpiarTablero();
             }
         }
     }
@@ -274,6 +267,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                 getContentPane().remove(nombre1);
                 getContentPane().remove(nombre2);
                 getContentPane().remove(puntuacion);
+                getContentPane().remove(background);
                 getContentPane().remove(tablero);
                 getContentPane().revalidate();
                 getContentPane().repaint();
