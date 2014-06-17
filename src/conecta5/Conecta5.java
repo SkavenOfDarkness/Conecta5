@@ -276,6 +276,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                 getContentPane().revalidate();
                 getContentPane().repaint();
                 ContadorFichas = 0;
+                jugador = true;
                 jugando = false;
     }
     
