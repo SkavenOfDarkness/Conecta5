@@ -164,9 +164,9 @@ public class Conecta5 extends JFrame implements MouseListener {
             nombre2.setIcon(new ImageIcon(Pieza.NEGRA));
 
             getContentPane().add(nombre1);
-            nombre1.setBounds(650, 0, 100, 50);
+            nombre1.setBounds(650, 0, 150, 50);
             getContentPane().add(nombre2);
-            nombre2.setBounds(650, 50, 100, 50);
+            nombre2.setBounds(650, 50, 150, 50);
             getContentPane().add(puntuacion);
             puntuacion.setBounds(650, 100, 100, 50);
             
