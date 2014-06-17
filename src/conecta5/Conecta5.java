@@ -200,6 +200,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     private void jmiFinalizarActionPerformed(ActionEvent evt) {      
         try {
             Sonido.sonido("finalizar");
+            //Sistema de pausa para la reproduccion de sonido antes de cerrar el programa
             Thread.sleep(4000);
             System.exit(0);
         } catch (InterruptedException ex) {
