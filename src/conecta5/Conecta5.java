@@ -87,10 +87,10 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiPausa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {                               
-                //play( getDocumentBase(),"sonido.au" );
-                sonido.Spausar.play();
+                //play( getDocumentBase(),"Sonido.au" );
+                Sonido.Spausar.play();
                 jmiPausaActionPerformed(evt);
-                sonido.Sreanudar.play();
+                Sonido.Sreanudar.play();
                 
                 
             }   
@@ -109,7 +109,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiFinalizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                sonido.Sfinalizar.play();
+                Sonido.Sfinalizar.play();
                 jmiFinalizarActionPerformed(evt);               
             }   
         });
@@ -160,8 +160,8 @@ public class Conecta5 extends JFrame implements MouseListener {
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
             puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
-            nombre1.setIcon(new ImageIcon(Pieza.ROJA));
-            nombre2.setIcon(new ImageIcon(Pieza.AZUL));
+            nombre1.setIcon(new ImageIcon(Pieza.BLANCA));
+            nombre2.setIcon(new ImageIcon(Pieza.NEGRA));
 
             getContentPane().add(nombre1);
             nombre1.setBounds(650, 0, 100, 50);
@@ -194,7 +194,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                                             -1 al pulsar la curz*/
             int opcion = JOptionPane.showConfirmDialog(null, "Desea cancelar la partida?", "Cancelando", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(opcion == 0) {
-                sonido.Scancelar.play();
+                Sonido.Scancelar.play();
                 limpiarTablero();
             }
         }
@@ -221,8 +221,8 @@ public class Conecta5 extends JFrame implements MouseListener {
             i = e.getY()/40;
             if (!tablero.empty(i, j)) {
                 if(jugador) {
-                    tablero.Pon(Pieza.ROJA, i, j);
-                    tablero.getT(i, j).setColor("ROJA");
+                    tablero.Pon(Pieza.BLANCA, i, j);
+                    tablero.getT(i, j).setColor("BLANCA");
                     jugador = false;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
@@ -230,15 +230,15 @@ public class Conecta5 extends JFrame implements MouseListener {
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
                         System.out.println("nombre ganador: " + nombreJugador1);                     
-                        sonido.sonido(nombreJugador1);
+                        Sonido.sonido(nombreJugador1);
                         JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                         limpiarTablero();
                     } 
                     
                 }
                 else {
-                    tablero.Pon(Pieza.AZUL, i, j);
-                    tablero.getT(i, j).setColor("AZUL");
+                    tablero.Pon(Pieza.NEGRA, i, j);
+                    tablero.getT(i, j).setColor("NEGRA");
                     jugador = true;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
@@ -246,7 +246,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
                         System.out.println("nombre ganador: " +nombreJugador2);
-                        sonido.sonido(nombreJugador2);
+                        Sonido.sonido(nombreJugador2);
                         JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                         limpiarTablero();
                     }

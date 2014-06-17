@@ -43,16 +43,15 @@ public class Casilla {
     public Boolean isOcupada() {
         return ocupada;
     }
-    public Pieza getPieza() {
-        return pieza;
-    }
 
     public void setColor(String color) {
         this.color = color;
     }
+    
     public String getColor() {
         return color;
     }
+    
      @Override
     public String toString() {
         return "Casilla{" + "cas=" + cas + ", ocupada=" + ocupada + ", pieza=" + pieza + ", color=" + color + '}';

@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
 
 class Pieza {
     
-    public static final String ROJA = "img/blanca.png";
-    public static final String AZUL = "img/negro.png";
+    public static final String BLANCA = "img/blanca.png";
+    public static final String NEGRA = "img/negro.png";
     
     private BufferedImage img;
     
