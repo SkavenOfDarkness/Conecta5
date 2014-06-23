@@ -1,42 +1,29 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase GanadorInOut escritura y lectura del fichero PUNTUACIONES.dat
  */
 
 package conecta5;
 
 import java.io.BufferedReader;
-import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author Javier
- */
+
 public class GanadorInOut {
-    // public static final int DIM = 3 + (9 * 2)+ (29 * 2); //Puntuacion + Nombre + Fecha
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private RandomAccessFile f;
     Ganador g = new Ganador();
     public int posicion;
-    //private final String nombre = "PUNTUACIONES.dat";
-
     
     public GanadorInOut(String nombre){
         try {
             f = new RandomAccessFile(nombre, "rw");
-
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }      
     }
     
     public void Escribir(Ganador g){
@@ -53,9 +40,8 @@ public class GanadorInOut {
         } 
     }
     
-    
     public String Lectura(){
-        String puntu, nom, fe, result = "";
+        String puntu, result;
         try {
             puntu = readString(3);
             result = puntu;
@@ -72,7 +58,6 @@ public class GanadorInOut {
             try {
                 campo[i] = f.readChar();
             } catch (IOException ex) {
-                
             }
         }
         return new String(campo).replace('\0', ' ');
@@ -128,9 +113,8 @@ public class GanadorInOut {
                 writeSring(p.Puntuacion, 3);
                 writeSring(p.Nombre, 9);
                 writeSring(p.fecha, 29);
-            }
-            
-        } catch (Exception e) {
+            }   
+        } catch (IOException e) {
             System.out.println("ERROR: " + e.getMessage());
         }
     }

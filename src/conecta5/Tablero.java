@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase tablero
  */
 
 package conecta5;
@@ -11,10 +9,6 @@ import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JPanel;
 
-/**
- *
- * @author skaven
- */
 public class Tablero extends JPanel { 
     private static final int TAMANO = 15;
     private static final int MAXIMO = 40*15;
@@ -57,10 +51,6 @@ public class Tablero extends JPanel {
         return t[i][j].isOcupada();
     } 
 
-    /**
-     *
-     * @return
-     */
     public int getMAXIMO() {
         return MAXIMO;
     }

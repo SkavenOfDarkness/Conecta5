@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase casilla 
  */
 
 package conecta5;
@@ -10,10 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
-/**
- *
- * @author skaven
- */
 public class Casilla {
     private Rectangle2D.Float cas;
     private Boolean ocupada;
