@@ -68,12 +68,13 @@ public class Juego {
                 jj--;               
             }
             //Recorrido diagonal desde punto de inicio.
+            //Diagonal inferior
             if (ii == 0){
                 Contador5 = 0;
                 //Varialble para delimitar recorrido
                 int delimitanteJ=jj;
                 //Recorremos mirando el limite del array
-                for (int k = 0; k < 14-delimitanteJ; k++,ii++,jj++) {
+                for (int k = 0; k < 15-delimitanteJ; k++,ii++,jj++) {
                     //Comprobación que el color sea null o diferente del de ese momento.
                     if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         Contador5 = 0;
@@ -88,12 +89,13 @@ public class Juego {
                     } 
                 }
             }
+            //Diagonal superior
             else if (jj == 0){
                 Contador5 = 0;
                 int delimitanteI=ii;
                 //Recorremos mirando el limite del array
                 //Se recorre quitando la fila
-                for (int f = 0; f < 14-delimitanteI; f++,ii++,jj++) {
+                for (int f = 0; f < 15-delimitanteI; f++,ii++,jj++) {
                   if ((ta.getT(ii,jj).getColor() == null) || !(colorActual.equalsIgnoreCase(ta.getT(ii, jj).getColor()))){
                         Contador5 = 0;
                     }
