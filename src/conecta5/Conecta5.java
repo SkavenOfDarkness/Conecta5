@@ -31,7 +31,6 @@ public class Conecta5 extends JFrame implements MouseListener {
     //Inicialización variables menú
     private JMenuBar jmb;
     private JMenu jmInicio;
-    private JMenu jmAyuda;
     private JMenuItem jmiJugar, jmiPausa, jmiCancelar, jmiFinalizar;
     
     //Inicialización variables nombres jugadores
@@ -42,7 +41,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     private GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
     
     //JLabel que contine el nombre de los jugadores y la puntuación
-    private JLabel nombre1, nombre2, puntuacion, background, puntuMax;
+    private JLabel nombre1, nombre2, puntuacion, background, puntuMax,flecha;
   
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     private boolean jugador = true;
@@ -67,7 +66,6 @@ public class Conecta5 extends JFrame implements MouseListener {
         //Asignamos componentes del menú
         jmb = new JMenuBar();
         jmInicio = new JMenu();
-        jmAyuda = new JMenu();
         jmiJugar = new JMenuItem();
         jmiPausa = new JMenuItem();
         jmiCancelar = new JMenuItem();
@@ -118,9 +116,7 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmInicio.add(jmiPausa);
         jmInicio.add(jmiCancelar);
         jmInicio.add(jmiFinalizar);
-        jmAyuda.setText("Ayuda");
         jmb.add(jmInicio);
-        jmb.add(jmAyuda);
         setJMenuBar(jmb);
     }
     
@@ -169,13 +165,17 @@ public class Conecta5 extends JFrame implements MouseListener {
             getContentPane().add(puntuacion);
             puntuacion.setBounds(650, 100, 100, 50);
             getContentPane().add(puntuMax);
-            puntuMax.setBounds(650, 200, 100, 50);
+            puntuMax.setBounds(650, 200, 200, 50);
             
             background = new JLabel(); 
             background.setIcon(new ImageIcon("img/background.png"));
             getContentPane().add(background);
             background.setBounds(0, 0, 600, 600);
             
+            flecha = new JLabel(); 
+            flecha.setIcon(new ImageIcon("img/flecha.png"));
+            getContentPane().add(flecha);
+            flecha.setBounds(629, 16, 21, 21);
             //Variable que se encarga de saber si estamos jugando o no
             jugando = true;
         }
@@ -234,6 +234,10 @@ public class Conecta5 extends JFrame implements MouseListener {
                     jugador = false;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
+                    
+                   
+                    flecha.setBounds(629, 66, 21, 21);
+                    
                     repaint();
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
@@ -255,6 +259,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                     jugador = true;
                     ContadorFichas++;
                     puntuacion.setText("Movimientos: "+Integer.toString(ContadorFichas));
+                    flecha.setBounds(629, 16, 21, 21);
                     repaint();
                     //Nos ha de devolver un true o un false
                     if(Juego.Logica(tablero, i, j)) {
