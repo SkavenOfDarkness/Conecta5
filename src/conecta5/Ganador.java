@@ -16,6 +16,7 @@ public class Ganador {
     private Date fecha;
     private String Nombre;
     private int Puntuacion;
+    public static final int DIM = (29 * 2) + (9 * 2) + 4; //Fecha + Nombre + Puntuacion
     
     public Ganador(){
     }
@@ -32,6 +33,7 @@ public class Ganador {
             Nombre = n;
         }
         Puntuacion = p;
+        
     }
 
     public Date getFecha() {

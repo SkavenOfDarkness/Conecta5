@@ -235,6 +235,9 @@ public class Conecta5 extends JFrame implements MouseListener {
                     if(Juego.Logica(tablero, i, j)) {
                         System.out.println("nombre ganador: " + nombreJugador1);                     
                         Sonido.sonido(nombreJugador1);
+                        Ganador G1 = new Ganador(nombreJugador1, ContadorFichas);
+                        GanadorInOut fg1 = new GanadorInOut("PUNTUACIONES.dat");
+                        fg1.Escribir(G1);
                         JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
                         limpiarTablero();
                     } 
