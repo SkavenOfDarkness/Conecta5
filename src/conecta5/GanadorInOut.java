@@ -7,6 +7,7 @@
 package conecta5;
 
 import java.io.BufferedReader;
+import java.io.File;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,26 +21,18 @@ import java.util.logging.Logger;
  * @author Javier
  */
 public class GanadorInOut {
-    //private static final int TAMANOOBJ = (29 * 2) + (9 * 2) + 4; //Fecha + Nombre + Puntuacion
+    // public static final int DIM = 3 + (9 * 2)+ (29 * 2); //Puntuacion + Nombre + Fecha
     BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     private RandomAccessFile f;
     Ganador g = new Ganador();
+    public int posicion;
     //private final String nombre = "PUNTUACIONES.dat";
-    //File arxiu = new File(nombre);
+
     
     public GanadorInOut(String nombre){
         try {
             f = new RandomAccessFile(nombre, "rw");
-            
-//        try {
-//            
-//            f = new RandomAccessFile(arxiu, "rw");
-//            f.close();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (IOException ex) {
-//            Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,15 +42,10 @@ public class GanadorInOut {
     public void Escribir(Ganador g){
         try {           
             f.seek(f.length());
-            //f = new RandomAccessFile(arxiu, "rw");
-            //writeSring(g.getFecha().toString());
             System.out.println(g.getPuntuacion());
-            int p = g.getPuntuacion();
-            f.writeChars(Integer.toString(p));
-            f.writeChars(g.getFecha().toString());
+            f.writeChars(g.getPuntuacion());
             f.writeChars(g.getNombre());
-
-            //f.close();
+            f.writeChars(g.getFecha());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -67,28 +55,28 @@ public class GanadorInOut {
     
     
     public String Lectura(){
-        String Resultado, fecha = "", nom = "";
-            int puntuacion = 0;
+        String puntu, nom, fe, result = "";
         try {
-            f = new RandomAccessFile(arxiu, "r");
-            long numreg = f.length() / TAMANOOBJ;
-            for (int i = 0; i < numreg; i++) {
-                for (int j = 1; j < (29 * 2); j++) {
-                    fecha = fecha + f.readChar();
-                }
-                for (int j = 1; j < (9 * 2); j++) {
-                    nom = nom + f.readChar();
-                }
-                puntuacion = f.readInt();
-            } 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
+            puntu = readString(3);
+            result = puntu;
+            f.close();
         } catch (IOException ex) {
-            Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
+            result = "No hay records";
         }
-        Resultado = nom + " - " + puntuacion;
-        return Resultado;
-    } 
+        return result;
+    }
+    
+    private String readString(int dim) {
+        char campo[] = new char[dim];
+        for (int i = 0; i < dim; i++) {
+            try {
+                campo[i] = f.readChar();
+            } catch (IOException ex) {
+                
+            }
+        }
+        return new String(campo).replace('\0', ' ');
+    }
 
     private void writeSring(String str, int dmi) {
         try {
@@ -102,7 +90,67 @@ public class GanadorInOut {
             Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void close() throws Exception{
-        f.close();
+    
+    public void ordena() {
+        try {
+            long numreg = f.length() / Ganador.DIM;
+            String Puntu,Nom,Fecha;
+            Ganador gMin, p;
+            int jmin;
+            for (int i = 0; i < numreg - 1; i++) {
+                f.seek(i * Ganador.DIM);
+                Puntu = readString(3);
+                Nom = readString(9);
+                Fecha = readString(29);
+                gMin = new Ganador(Puntu, Nom, Fecha);
+                jmin = i;
+                for (int j = i + 1; j < numreg; j++) {
+                    f.seek(j * Ganador.DIM);
+                    Puntu = readString(3);
+                    Nom = readString(9);
+                    Fecha = readString(29);
+                    p = new Ganador(Puntu, Nom, Fecha);
+                    if (p.menor(gMin)) {
+                        gMin = p;
+                        jmin = j;
+                    }
+                }
+                f.seek(i * Ganador.DIM);
+                Puntu = readString(3);
+                Nom = readString(9);
+                Fecha = readString(29);
+                p = new Ganador(Puntu, Nom, Fecha);
+                f.seek(i * Ganador.DIM);
+                writeSring(gMin.Puntuacion, 3);
+                writeSring(gMin.Nombre, 9);
+                writeSring(gMin.fecha, 29);
+                f.seek(jmin * Ganador.DIM);
+                writeSring(p.Puntuacion, 3);
+                writeSring(p.Nombre, 9);
+                writeSring(p.fecha, 29);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+    }
+    
+    public void posicion(Ganador g) {
+        try {
+            long numreg = f.length() / Ganador.DIM;
+            String p, n, fe;
+            f.seek(0);
+            for (int i = 0; i < numreg; i++) {
+                p = readString(3);
+                n = readString(9);
+                fe = readString(29);
+                if(fe.equals(g.fecha)) {
+                    posicion = i;
+                }
+            }
+            f.close();
+        } catch (IOException ex) {
+            Logger.getLogger(GanadorInOut.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -13,18 +13,18 @@ import java.util.Date;
  * @author Javier
  */
 public class Ganador {
-    private Date fecha;
-    private String Nombre;
-    private int Puntuacion;
-    public static final int DIM = (29 * 2) + (9 * 2) + 4; //Fecha + Nombre + Puntuacion
+    public String fecha;
+    public String Nombre, pp;
+    public String Puntuacion;
+    public static final int DIM = (3 * 2) + (9 * 2)+ (29 * 2); //Puntuacion + Nombre + Fecha
     
     public Ganador(){
     }
     
     public Ganador(String n, int p){
-        fecha = new Date();
+        fecha = new Date().toString();
         if(n.length() < 9) {
-            for (int i = n.length(); i < 10; i++) {
+            for (int i = n.length(); i < 9; i++) {
                 n = n + " ";
             }
             Nombre = n;
@@ -32,11 +32,25 @@ public class Ganador {
         else {
             Nombre = n;
         }
-        Puntuacion = p;
-        
+        pp = Integer.toString(p);
+        if(pp.length() < 3) {
+            for (int i = pp.length(); i < 3; i++) {
+                pp = "0" + pp;
+            }
+            Puntuacion = pp;
+        }
+        else {
+            Puntuacion = pp;
+        }
     }
 
-    public Date getFecha() {
+    public Ganador(String p, String nom, String fecha) {
+        this.Puntuacion = p;
+        this.Nombre = nom;
+        this.fecha = fecha;
+    }
+    
+    public String getFecha() {
         return fecha;
     }
 
@@ -44,7 +58,11 @@ public class Ganador {
         return Nombre;
     }
 
-    public int getPuntuacion() {
+    public String getPuntuacion() {
         return Puntuacion;
+    }
+    
+    boolean menor(Ganador p) {
+        return Integer.parseInt(this.Puntuacion) < Integer.parseInt(p.Puntuacion);
     }
 }

@@ -39,9 +39,10 @@ public class Conecta5 extends JFrame implements MouseListener {
     private static  String nombreJugador2;
     public int ContadorFichas  = 0;
     
+    private GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
     
     //JLabel que contine el nombre de los jugadores y la puntuación
-    private JLabel nombre1, nombre2, puntuacion, background;
+    private JLabel nombre1, nombre2, puntuacion, background, puntuMax;
   
     //Variable que mantiene al jugador actual, true --> jugador 1, false --> jugador 2
     private boolean jugador = true;
@@ -157,6 +158,7 @@ public class Conecta5 extends JFrame implements MouseListener {
             nombre1 = new JLabel(nombreJugador1);
             nombre2 = new JLabel(nombreJugador2);
             puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
+            puntuMax = new JLabel ("Record: " + gio.Lectura() + " puntos");
             nombre1.setIcon(new ImageIcon(Pieza.BLANCA));
             nombre2.setIcon(new ImageIcon(Pieza.NEGRA));
 
@@ -166,6 +168,8 @@ public class Conecta5 extends JFrame implements MouseListener {
             nombre2.setBounds(650, 50, 150, 50);
             getContentPane().add(puntuacion);
             puntuacion.setBounds(650, 100, 100, 50);
+            getContentPane().add(puntuMax);
+            puntuMax.setBounds(650, 200, 100, 50);
             
             background = new JLabel(); 
             background.setIcon(new ImageIcon("img/background.png"));
@@ -238,7 +242,9 @@ public class Conecta5 extends JFrame implements MouseListener {
                         Ganador G1 = new Ganador(nombreJugador1, ContadorFichas);
                         GanadorInOut fg1 = new GanadorInOut("PUNTUACIONES.dat");
                         fg1.Escribir(G1);
-                        JOptionPane.showMessageDialog(null,nombreJugador1 + " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                        fg1.ordena();
+                        fg1.posicion(G1);
+                        JOptionPane.showMessageDialog(null,nombreJugador1 +  " ha ganado\n" + "Puntos: " + ContadorFichas + "\nPosicion: " + (fg1.posicion+1), "WINNER", JOptionPane.INFORMATION_MESSAGE);
                         limpiarTablero();
                     } 
                     
@@ -254,7 +260,12 @@ public class Conecta5 extends JFrame implements MouseListener {
                     if(Juego.Logica(tablero, i, j)) {
                         System.out.println("nombre ganador: " +nombreJugador2);
                         Sonido.sonido(nombreJugador2);
-                        JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado", "WINNER", JOptionPane.INFORMATION_MESSAGE);
+                        Ganador G2 = new Ganador(nombreJugador2, ContadorFichas);
+                        GanadorInOut fg2 = new GanadorInOut("PUNTUACIONES.dat");
+                        fg2.Escribir(G2);
+                        fg2.ordena();
+                        fg2.posicion(G2);
+                        JOptionPane.showMessageDialog(null,nombreJugador2 +  " ha ganado\n" + "Puntos: " + ContadorFichas + "\nPosicion: " + (fg2.posicion+1), "WINNER", JOptionPane.INFORMATION_MESSAGE);
                         limpiarTablero();
                     }
                 }
@@ -274,6 +285,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                 getContentPane().remove(nombre1);
                 getContentPane().remove(nombre2);
                 getContentPane().remove(puntuacion);
+                getContentPane().remove(puntuMax);
                 getContentPane().remove(background);
                 getContentPane().remove(tablero);
                 getContentPane().revalidate();
