@@ -40,7 +40,7 @@ public class Conecta5 extends JFrame implements MouseListener {
     public int ContadorFichas  = 0;
     
     //Inicialización archivo puntuaciones
-    private GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
+    private final GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
     
     //JLabel que contine el nombre de los jugadores, la puntuación y demas elementos graficos
     private JLabel nombre1, nombre2, puntuacion, background, puntuMax, flecha;
@@ -81,18 +81,22 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiJugar.setText("Jugar");
         jmiJugar.addActionListener(new ActionListener(){
             @Override
-            public void actionPerformed(ActionEvent evt) {               
-                jmiJugarActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                if(!jugando){
+                    jmiJugarActionPerformed(evt);
+                }
             }
         });
         
         jmiPausa.setText("Pausa");
         jmiPausa.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {                               
-                Sonido.sonido("partida_pausada");
-                jmiPausaActionPerformed(evt);
-                Sonido.sonido("reanudacion_partida");   
+            public void actionPerformed(ActionEvent evt) {
+                if(jugando) {
+                    Sonido.sonido("partida_pausada");
+                    jmiPausaActionPerformed(evt);
+                    Sonido.sonido("reanudacion_partida");
+                }
             }   
         });
         
@@ -100,7 +104,9 @@ public class Conecta5 extends JFrame implements MouseListener {
         jmiCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                jmiCancelarActionPerformed(evt);
+                if(jugando) {
+                    jmiCancelarActionPerformed(evt);
+                }
             }   
         });
         
@@ -123,79 +129,73 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
-        if(!jugando){
-            //Creamos el tableto
-            tablero = new Tablero();
+        //Creamos el tableto
+        tablero = new Tablero();
 
-            //Agregamos el escuchador al tablero para el ratón
-            tablero.addMouseListener(this);
-            
-            //Lista de los nombres para elegir
-            String[] listaNombres = { "Javier", "Luis", "Antonio","Jose","Adolfo","Pepe","Jesus"};
-            
-            //Petición mediante panel del nombre de los usuarios
-            nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
-            nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
-            
-            //Comprobacion en caso de pulsar cancelar
-            if(nombreJugador1==null){
-                nombreJugador1= "Jugador 1";
-            }
-            if(nombreJugador2==null){
-                nombreJugador2= "Jugador 2";
-            }
-            //Necesario para pintar los componentes de nombre
-            repaint();
-            getContentPane().add(tablero);
-            tablero.setBounds(0, 0, 700, 700);
-            //añadir fotos de las ficha de cada jugador          
-            nombre1 = new JLabel(nombreJugador1);
-            nombre2 = new JLabel(nombreJugador2);
-            puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
-            puntuMax = new JLabel ("Record: " + gio.Lectura() + " puntos");
-            nombre1.setIcon(new ImageIcon(Pieza.BLANCA));
-            nombre2.setIcon(new ImageIcon(Pieza.NEGRA));
+        //Agregamos el escuchador al tablero para el ratón
+        tablero.addMouseListener(this);
 
-            getContentPane().add(nombre1);
-            nombre1.setBounds(650, 0, 150, 50);
-            getContentPane().add(nombre2);
-            nombre2.setBounds(650, 50, 150, 50);
-            getContentPane().add(puntuacion);
-            puntuacion.setBounds(650, 100, 100, 50);
-            getContentPane().add(puntuMax);
-            puntuMax.setBounds(650, 200, 200, 50);
-            
-            background = new JLabel(); 
-            background.setIcon(new ImageIcon("img/background.png"));
-            getContentPane().add(background);
-            background.setBounds(0, 0, 600, 600);
-            
-            flecha = new JLabel(); 
-            flecha.setIcon(new ImageIcon("img/flecha.png"));
-            getContentPane().add(flecha);
-            flecha.setBounds(629, 16, 21, 21);
-            //Variable que se encarga de saber si estamos jugando o no
-            jugando = true;
+        //Lista de los nombres para elegir
+        String[] listaNombres = { "Javier", "Luis", "Antonio","Jose","Adolfo","Pepe","Jesus"};
+
+        //Petición mediante panel del nombre de los usuarios
+        nombreJugador1 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador1" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+        nombreJugador2 = (String)JOptionPane.showInputDialog(null, "Seleccione nombre jugador2" , "NOMBRES", JOptionPane.QUESTION_MESSAGE, null, listaNombres, listaNombres[0]);
+
+        //Comprobacion en caso de pulsar cancelar
+        if(nombreJugador1==null){
+            nombreJugador1= "Jugador 1";
         }
+        if(nombreJugador2==null){
+            nombreJugador2= "Jugador 2";
+        }
+        //Necesario para pintar los componentes de nombre
+        repaint();
+        getContentPane().add(tablero);
+        tablero.setBounds(0, 0, 700, 700);
+        //añadir fotos de las ficha de cada jugador          
+        nombre1 = new JLabel(nombreJugador1);
+        nombre2 = new JLabel(nombreJugador2);
+        puntuacion = new JLabel ("Movimientos: "+Integer.toString(ContadorFichas));
+        puntuMax = new JLabel ("Record: " + gio.Lectura() + " puntos");
+        nombre1.setIcon(new ImageIcon(Pieza.BLANCA));
+        nombre2.setIcon(new ImageIcon(Pieza.NEGRA));
+
+        getContentPane().add(nombre1);
+        nombre1.setBounds(650, 0, 150, 50);
+        getContentPane().add(nombre2);
+        nombre2.setBounds(650, 50, 150, 50);
+        getContentPane().add(puntuacion);
+        puntuacion.setBounds(650, 100, 100, 50);
+        getContentPane().add(puntuMax);
+        puntuMax.setBounds(650, 200, 200, 50);
+
+        background = new JLabel(); 
+        background.setIcon(new ImageIcon("img/background.png"));
+        getContentPane().add(background);
+        background.setBounds(0, 0, 600, 600);
+
+        flecha = new JLabel(); 
+        flecha.setIcon(new ImageIcon("img/flecha.png"));
+        getContentPane().add(flecha);
+        flecha.setBounds(629, 16, 21, 21);
+        //Variable que se encarga de saber si estamos jugando o no
+        jugando = true;
     }
     
-    private void jmiPausaActionPerformed(ActionEvent evt) {
-        if(jugando) {              
-            JOptionPane.showMessageDialog(null, "Pulse aceptar para seguir jugando", "PAUSA", JOptionPane.INFORMATION_MESSAGE);
-        }
+    private void jmiPausaActionPerformed(ActionEvent evt) {             
+        JOptionPane.showMessageDialog(null, "Pulse aceptar para seguir jugando", "PAUSA", JOptionPane.INFORMATION_MESSAGE);
     }
     
     private void jmiCancelarActionPerformed(ActionEvent evt) {
-        if(jugando) {
-            /*La opcion YES_NO_OPTION devuelve:
-                                            0 al pulsar si
-                                            1 al pulsar no
-                                            -1 al pulsar la curz*/
-            int opcion = JOptionPane.showConfirmDialog(null, "Desea cancelar la partida?", "Cancelando", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(opcion == 0) {
-                Sonido.sonido("partida_cancelada");
-                limpiarTablero();
-            }
+        /*La opcion YES_NO_OPTION devuelve:
+                                        0 al pulsar si
+                                        1 al pulsar no
+                                        -1 al pulsar la curz*/
+        int opcion = JOptionPane.showConfirmDialog(null, "Desea cancelar la partida?", "Cancelando", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(opcion == 0) {
+            Sonido.sonido("partida_cancelada");
+            limpiarTablero();
         }
     }
     

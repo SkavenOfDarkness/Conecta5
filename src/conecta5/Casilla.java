@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 
 public class Casilla {
-    private Rectangle2D.Float cas;
+    private final Rectangle2D.Float cas;
     private Boolean ocupada;
     private Pieza pieza;
     private String color;
