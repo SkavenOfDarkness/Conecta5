@@ -286,6 +286,7 @@ public class Conecta5 extends JFrame implements MouseListener {
                 getContentPane().remove(nombre2);
                 getContentPane().remove(puntuacion);
                 getContentPane().remove(puntuMax);
+                getContentPane().remove(flecha);
                 getContentPane().remove(background);
                 getContentPane().remove(tablero);
                 getContentPane().revalidate();
