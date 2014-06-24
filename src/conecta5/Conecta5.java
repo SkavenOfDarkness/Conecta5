@@ -39,9 +39,6 @@ public class Conecta5 extends JFrame implements MouseListener {
     private static  String nombreJugador2;
     public int ContadorFichas  = 0;
     
-    //Inicialización archivo puntuaciones
-    private final GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
-    
     //JLabel que contine el nombre de los jugadores, la puntuación y demas elementos graficos
     private JLabel nombre1, nombre2, puntuacion, background, puntuMax, flecha;
   
@@ -129,6 +126,9 @@ public class Conecta5 extends JFrame implements MouseListener {
     }
     
     private void jmiJugarActionPerformed(ActionEvent evt) {
+        //Inicialización archivo puntuaciones
+        final GanadorInOut gio = new GanadorInOut("PUNTUACIONES.dat");
+    
         //Creamos el tableto
         tablero = new Tablero();
 
